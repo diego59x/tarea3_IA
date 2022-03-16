@@ -1,3 +1,4 @@
+from cmath import nan
 import numpy as np
 from matplotlib import pyplot as plt
 import math
@@ -65,15 +66,20 @@ def stepDepeest(x0, f, df, alpha= 0.1, maxI=500, tolx=1e-4, tolf= 1e-4, tolg=1e-
         dfx = df(x)
 
         iters += 1
-        approx.append(x)
-        values.append(fx)
+        for i in range(0, len(x)):
+            if (not np.isnan(x[i]) and not np.isinf(x[i])):
+                approx.append(x)
+        
+        if (not np.isnan(fx) and not np.isinf(fx)):
+            values.append(fx)
         grads.append(dfx)
 
         error = np.linalg.norm(oldx-x, metric)
         if error < tolx:
             fin = 1
             convergence = 1
-        errs.append(error)
+        if (not np.isnan(error)):
+            errs.append(error)
 
     print("=======================================")
     print("Best: ", values[-1])
