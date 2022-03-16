@@ -73,8 +73,7 @@ def stepDepeest(x0, f, df, alpha= 0.1, maxI=500, tolx=1e-4, tolf= 1e-4, tolg=1e-
         if error < tolx:
             fin = 1
             convergence = 1
-        if (math.isnan(error) != False):
-            errs.append(error)
+        errs.append(error)
 
     print("=======================================")
     print("Best: ", values[-1])
